@@ -1,12 +1,16 @@
 function Navbar() {
   return (
-    <nav className="bg-[#212121] shadow-lg">
+    <nav className="bg-[#212121] shadow-lg sticky top-0 z-50">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden"></div>
           <div className="flex flex-1 items-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
-              <img className="h-8 w-auto ml-2 md:ml-0" src="/jsonflow_icon.svg" alt="Logo" />
+              <img
+                className="h-8 w-auto ml-2 md:ml-0"
+                src="/jsonflow_icon.svg"
+                alt="Logo"
+              />
               <span className="ml-2 text-xl md:text-2xl font-sourceCode text-white">
                 JSONFlow
               </span>

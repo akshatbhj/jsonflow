@@ -1,8 +1,12 @@
-import Navbar from "../components/Navbar"
+import DataContainers from "../components/DataContainers";
+import Navbar from "../components/Navbar";
 function HomePage() {
-    return (
-        <Navbar />
-    )
+  return (
+    <>
+      <Navbar />
+      <DataContainers />
+    </>
+  );
 }
 
-export default HomePage
+export default HomePage;
