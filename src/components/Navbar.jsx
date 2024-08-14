@@ -12,7 +12,7 @@ function Navbar() {
                 alt="Logo"
               />
               <span className="ml-2 text-xl md:text-2xl font-sourceCode text-white">
-                JSONFlow
+                jsonFlow
               </span>
             </div>
           </div>
