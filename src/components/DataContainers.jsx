@@ -1,15 +1,35 @@
 import { useState } from "react";
 import { formatJson } from "../utils/formatting.utils";
+import { fetchJsonData } from "../utils/fetchJsonData";
+import { FaTimes } from "react-icons/fa";
 
 function DataContainers() {
   const [inputData, setInputData] = useState("");
+  const [inputURL, setInputURL] = useState("");
   const [outputData, setOutputData] = useState("");
   const [indentLevel, setIndentLevel] = useState(2);
+  const [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState(null);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   // Function to handle formatting JSON
   const handleFormatJson = () => {
     const formattedJson = formatJson(inputData, indentLevel);
     setOutputData(formattedJson);
+  };
+
+  // Function to handle fetching JSON data
+  const handleFetchJson = async () => {
+    const { data, error } = await fetchJsonData(inputURL);
+    if (error) {
+      setError(error);
+      setInputURL("");
+    } else {
+      setError(null);
+      setInputData(JSON.stringify(data, null, 2)); // Format the fetched JSON with 2 spaces
+      closeModal(); // Close the modal after fetching
+    }
   };
 
   return (
@@ -26,9 +46,48 @@ function DataContainers() {
           onChange={(e) => setInputData(e.target.value)}
         />
         <div className="w-[20%] flex flex-col justify-center space-y-6 items-center bg-white h-96 mx-auto">
-          <button className="w-[75%] bg-[#212121] hover:bg-[#212121]/90 text-white text-sm font-mono focus:outline-none focus:border-transparent p-4 rounded-md">
-            Upload Data
+          <button
+            onClick={openModal}
+            className="w-[75%] bg-[#212121] hover:bg-[#212121]/90 text-white text-sm font-mono focus:outline-none focus:border-transparent p-4 rounded-md"
+          >
+            Fetch JSON
           </button>
+          {isOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+              <div className="bg-gray-900 w-11/12 max-w-lg mx-auto p-6 rounded-lg shadow-lg relative">
+                {/* Close Button */}
+                <button
+                  className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                  onClick={closeModal}
+                >
+                  <FaTimes className="w-5 h-5" />
+                </button>
+
+                {/* Modal Content */}
+                <div className="text-center">
+                  <h2 className="text-2xl font-semibold text-gray-100 mb-4">
+                    Enter URL to fetch data
+                  </h2>
+
+                  <input
+                    type="text"
+                    className="w-full p-2 bg-[#212121] text-white text-sm font-mono border border-gray-700  focus:outline-none focus:border-transparent rounded-md"
+                    placeholder="Enter URL here..."
+                    value={inputURL}
+                    onChange={(e) => setInputURL(e.target.value)}
+                  />
+
+                  <button
+                    className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                    onClick={handleFetchJson}
+                  >
+                    Fetch
+                  </button>
+                  {error && <p className="mt-2 text-red-500">{error}</p>}
+                </div>
+              </div>
+            </div>
+          )}
           <button className="w-[75%] bg-[#212121] hover:bg-[#212121]/90 text-white text-sm font-mono focus:outline-none focus:border-transparent p-4 rounded-md">
             Validate
           </button>
