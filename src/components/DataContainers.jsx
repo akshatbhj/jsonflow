@@ -89,7 +89,7 @@ function DataContainers() {
             </div>
           )}
           <button className="w-[75%] bg-[#212121] hover:bg-[#212121]/90 text-white text-sm font-mono focus:outline-none focus:border-transparent p-4 rounded-md">
-            Validate
+            Blank
           </button>
           <div className="relative inline-block w-[75%]">
             <select
