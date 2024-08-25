@@ -209,9 +209,6 @@ function DataContainers() {
           >
             Format
           </button>
-          <button className="w-[75%] bg-[#212121]  hover:bg-[#212121]/90 text-white text-sm font-mono  focus:outline-none focus:border-transparent p-4 rounded-md">
-            Download
-          </button>
         </div>
         <textarea
           className="w-[40%] h-[500px] mx-auto p-4 bg-[#212121] text-white text-sm font-mono focus:outline-none focus:border-transparent rounded-md"

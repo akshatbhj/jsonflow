@@ -2,7 +2,6 @@ import { XMLBuilder } from "fast-xml-parser";
 import Papa from "papaparse";
 import YAML from "yaml";
 
-
 export const convertJsonToXml = (json) => {
     try {
       // Parse the JSON string into a JavaScript object
@@ -24,14 +23,15 @@ export const convertJsonToXml = (json) => {
     }
   };
 
-export const convertJsonToCsv = (json) => {
-  try {
-    const parsedJson = JSON.parse(json);
-    return Papa.unparse(parsedJson);
-  } catch (error) {
-    return `Error converting JSON to CSV: ${error.message}`;
-  }
-};
+  export const convertJsonToCsv = (json) => {
+    try {
+      // Convert the JSON array to CSV format
+      const csv = Papa.unparse(json);
+      return csv;
+    } catch (error) {
+      return `Error converting JSON to CSV: ${error.message}`;
+    }
+  };
 
 export const convertJsonToYaml = (json) => {
   try {
